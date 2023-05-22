@@ -44,17 +44,6 @@ SELECT
 FROM Purchasing.Suppliers AS s
 LEFT JOIN Purchasing.PurchaseOrders AS po ON po.SupplierID = s.SupplierID
 WHERE po.PurchaseOrderID IS NULL
-GROUP BY s.SupplierID, s.SupplierName
-
---OR
-
-SELECT
-    s.SupplierID AS [ИД поставщика],
-	s.SupplierName AS [Наименование поставщика]
-FROM Purchasing.Suppliers AS s
-LEFT JOIN Purchasing.PurchaseOrders AS po ON po.SupplierID = s.SupplierID
-GROUP BY s.SupplierID, s.SupplierName
-HAVING count(po.PurchaseOrderID) = 0
 
 /*
 3. Заказы (Orders) с ценой товара (UnitPrice) более 100$ 
@@ -134,7 +123,7 @@ SELECT
 FROM Purchasing.PurchaseOrders po
 INNER JOIN Application.DeliveryMethods dm ON dm.DeliveryMethodID = po.DeliveryMethodID
 INNER JOIN Purchasing.Suppliers s ON s.SupplierID = po.SupplierID
-LEFT JOIN Application.People p ON p.PersonID = po.ContactPersonID
+INNER JOIN Application.People p ON p.PersonID = po.ContactPersonID
 WHERE 
 (dm.DeliveryMethodName = 'Air Freight' OR dm.DeliveryMethodName = 'Refrigerated Air Freight')
 AND po.IsOrderFinalized = 1
@@ -150,11 +139,11 @@ AND po.ExpectedDeliveryDate BETWEEN '20130101' AND '20130131'
 SELECT 
     TOP 10
     sPerson.FullName [Заказ оформил],
-    cPerson.FullName [Имя клиента],
+    client.CustomerName [Имя клиента],
     o.*
 FROM Sales.Orders o
-LEFT JOIN Application.People sPerson ON sPerson.PersonID = o.SalespersonPersonID
-LEFT JOIN Application.People cPerson ON cPerson.PersonID = o.ContactPersonID
+INNER JOIN Application.People sPerson ON sPerson.PersonID = o.SalespersonPersonID
+INNER JOIN Sales.Customers client ON client.CustomerID = o.CustomerID
 ORDER BY o.OrderDate DESC
 
 /*
@@ -164,12 +153,11 @@ ORDER BY o.OrderDate DESC
 */
 
 SELECT 
-	p.PersonID [ИД Клиента],
-	p.FullName [Имя клиента],
-	p.PhoneNumber [Телефон]
-FROM Purchasing.PurchaseOrders AS po
-INNER JOIN Purchasing.PurchaseOrderLines AS pol ON pol.PurchaseOrderID = po.PurchaseOrderID
-INNER JOIN Warehouse.StockItems AS si ON si.StockItemID = pol.StockItemID
-LEFT JOIN Application.People AS p ON p.PersonID = po.ContactPersonID
+	client.CustomerID [ИД Клиента],
+	client.CustomerName [Имя клиента],
+	client.PhoneNumber AS [Телефон]
+FROM Sales.Orders AS o
+INNER JOIN Sales.OrderLines AS ol ON ol.OrderID = o.OrderID
+INNER JOIN Warehouse.StockItems AS si ON si.StockItemID = ol.StockItemID
+INNER JOIN Sales.Customers AS client ON client.CustomerID = o.CustomerID
 WHERE si.StockItemName = 'Chocolate frogs 250g'
-GROUP BY p.PersonID, p.FullName, p.PhoneNumber
