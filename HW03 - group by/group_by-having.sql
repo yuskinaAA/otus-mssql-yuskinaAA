@@ -53,9 +53,9 @@ ORDER BY [Год продажи], [Месяц продажи]
 */
 
 SELECT 
-	YEAR(i.InvoiceDate) [Год продажи],
-	MONTH(i.InvoiceDate) [Месяц продажи],
-	SUM(il.ExtendedPrice) [Общая сумма продажи]
+	YEAR(i.InvoiceDate) AS [Год продажи],
+	MONTH(i.InvoiceDate) AS [Месяц продажи],
+	SUM(il.ExtendedPrice) AS [Общая сумма продажи]
 FROM Sales.Invoices i
 INNER JOIN Sales.InvoiceLines il ON il.InvoiceID = i.InvoiceID
 GROUP BY YEAR(i.InvoiceDate), MONTH(i.InvoiceDate)
@@ -102,3 +102,70 @@ ORDER BY [Год продажи], [Месяц продажи], [Наименов
 Написать запросы 2-3 так, чтобы если в каком-то месяце не было продаж,
 то этот месяц также отображался бы в результатах, но там были нули.
 */
+/*
+  Для 3-ьего
+  Даты выбираю все что есть в таблице продаж, можно будет передавать параметрами
+*/
+
+DECLARE @maxdate DATE = (SELECT Max(dateadd(day, - datepart(day, ([InvoiceDate])) + 1, convert(date, ([InvoiceDate])))) FROM Sales.Invoices)
+
+;WITH AllDate AS ( SELECT MIN(DATEADD(DAY, - DATEPART(DAY, ([InvoiceDate])) + 1, CONVERT(DATE, ([InvoiceDate])))) AS dt 
+                  FROM Sales.Invoices
+
+                  UNION ALL 
+
+				  SELECT dateadd(mm, 1, dt) 
+				  FROM AllDate 
+				  WHERE dt < @maxdate) 
+
+SELECT 
+ COALESCE(t.[Год продажи], YEAR(c.dt)) [Год продажи],
+ COALESCE(t.[Месяц продажи], MONTH(c.dt)) [Месяц продажи],
+ COALESCE(t.[Наименование товара], '') [Наименование товара],
+ COALESCE(t.[Общая сумма продажи], 0) [Общая сумма продажи],
+ t.[Дата первой продажи] [Дата первой продажи],
+ COALESCE(t.[Количество проданного], 0) [Количество проданного]
+FROM AllDate c
+LEFT JOIN (
+		SELECT 
+			YEAR(i.InvoiceDate) AS [Год продажи],
+			MONTH(i.InvoiceDate) AS [Месяц продажи],
+			si.StockItemName AS [Наименование товара],
+			SUM(il.ExtendedPrice) AS [Общая сумма продажи], 
+			MIN(i.InvoiceDate) AS [Дата первой продажи],
+			SUM(il.Quantity) AS [Количество проданного]
+		FROM Sales.Invoices i
+		INNER JOIN Sales.InvoiceLines il ON il.InvoiceID = i.InvoiceID
+		INNER JOIN Warehouse.StockItems si ON si.StockItemID = il.StockItemID
+		GROUP BY YEAR(i.InvoiceDate), MONTH(i.InvoiceDate), si.StockItemName
+		HAVING SUM(ISNULL(il.Quantity,0)) < 50
+) t ON t.[Год продажи] = YEAR(c.dt) AND t.[Месяц продажи] = MONTH(c.dt)
+ORDER BY YEAR(dt), MONTH(dt)
+
+/*Для 2-го аналогично*/
+DECLARE @maxdate DATE = (SELECT Max(dateadd(day, - datepart(day, ([InvoiceDate])) + 1, convert(date, ([InvoiceDate])))) FROM Sales.Invoices); 
+
+WITH AllDate AS ( SELECT MIN(DATEADD(DAY, - DATEPART(DAY, ([InvoiceDate])) + 1, CONVERT(DATE, ([InvoiceDate])))) AS dt 
+                  FROM Sales.Invoices
+
+                  UNION ALL 
+
+				  SELECT dateadd(mm, 1, dt) 
+				  FROM AllDate 
+				  WHERE dt < @maxdate) 
+
+SELECT 
+ COALESCE(t.[Год продажи], YEAR(c.dt)) [Год продажи],
+ COALESCE(t.[Месяц продажи], MONTH(c.dt)) [Месяц продажи],
+ COALESCE(t.[Общая сумма продажи], 0) [Общая сумма продажи]
+FROM AllDate c
+LEFT JOIN (
+	SELECT 
+		YEAR(i.InvoiceDate) AS [Год продажи],
+		MONTH(i.InvoiceDate) AS [Месяц продажи],
+		SUM(il.ExtendedPrice) AS [Общая сумма продажи]
+	FROM Sales.Invoices i
+	INNER JOIN Sales.InvoiceLines il ON il.InvoiceID = i.InvoiceID
+	GROUP BY YEAR(i.InvoiceDate), MONTH(i.InvoiceDate)
+	HAVING SUM(il.ExtendedPrice) > 4600000) t ON t.[Год продажи] = YEAR(c.dt) AND t.[Месяц продажи] = MONTH(c.dt)
+ORDER BY YEAR(dt), MONTH(dt)
