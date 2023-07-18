@@ -4,11 +4,11 @@ GO
 USE TicketSystem
 GO
 
-/*схема для словаря*/
+/*СЃС…РµРјР° РґР»СЏ СЃР»РѕРІР°СЂСЏ*/
 CREATE SCHEMA Dictionary
 GO
 
-/*статусы*/
+/*СЃС‚Р°С‚СѓСЃС‹*/
 CREATE TABLE [Dictionary].[Statuses](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[name] NVARCHAR(50) NOT NULL,
@@ -18,16 +18,16 @@ CREATE TABLE [Dictionary].[Statuses](
  ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'имя' , @level0type=N'SCHEMA',@level0name=N'Dictionary', @level1type=N'TABLE',@level1name=N'Statuses', @level2type=N'COLUMN',@level2name=N'name'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'описание' , @level0type=N'SCHEMA',@level0name=N'Dictionary', @level1type=N'TABLE',@level1name=N'Statuses', @level2type=N'COLUMN',@level2name=N'description'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'к какой таблице относятся' , @level0type=N'SCHEMA',@level0name=N'Dictionary', @level1type=N'TABLE',@level1name=N'Statuses', @level2type=N'COLUMN',@level2name=N'table_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РёРјСЏ' , @level0type=N'SCHEMA',@level0name=N'Dictionary', @level1type=N'TABLE',@level1name=N'Statuses', @level2type=N'COLUMN',@level2name=N'name'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РѕРїРёСЃР°РЅРёРµ' , @level0type=N'SCHEMA',@level0name=N'Dictionary', @level1type=N'TABLE',@level1name=N'Statuses', @level2type=N'COLUMN',@level2name=N'description'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Рє РєР°РєРѕР№ С‚Р°Р±Р»РёС†Рµ РѕС‚РЅРѕСЃСЏС‚СЃСЏ' , @level0type=N'SCHEMA',@level0name=N'Dictionary', @level1type=N'TABLE',@level1name=N'Statuses', @level2type=N'COLUMN',@level2name=N'table_id'
 GO
 
-/*схема для каталогов*/
+/*СЃС…РµРјР° РґР»СЏ РєР°С‚Р°Р»РѕРіРѕРІ*/
 CREATE SCHEMA Directory
 GO
 
-/*дилеры*/
+/*РґРёР»РµСЂС‹*/
 CREATE TABLE [Directory].[Dealers](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[name] NVARCHAR(100) NOT NULL,
@@ -37,11 +37,11 @@ CREATE TABLE [Directory].[Dealers](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'имя дилера' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Dealers', @level2type=N'COLUMN',@level2name=N'name'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'номер' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Dealers', @level2type=N'COLUMN',@level2name=N'seq_number'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'удален' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Dealers', @level2type=N'COLUMN',@level2name=N'is_deleted'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РёРјСЏ РґРёР»РµСЂР°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Dealers', @level2type=N'COLUMN',@level2name=N'name'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РЅРѕРјРµСЂ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Dealers', @level2type=N'COLUMN',@level2name=N'seq_number'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'СѓРґР°Р»РµРЅ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Dealers', @level2type=N'COLUMN',@level2name=N'is_deleted'
 
-/*владельцы*/
+/*РІР»Р°РґРµР»СЊС†С‹*/
 CREATE TABLE [Directory].[Owners](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[name] NVARCHAR(100) NOT NULL,
@@ -51,12 +51,12 @@ CREATE TABLE [Directory].[Owners](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Наименование владельца билетов' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Owners', @level2type=N'COLUMN',@level2name=N'name'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Удален' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Owners', @level2type=N'COLUMN',@level2name=N'is_deleted'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Порядковый номер' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Owners', @level2type=N'COLUMN',@level2name=N'seq_number'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РќР°РёРјРµРЅРѕРІР°РЅРёРµ РІР»Р°РґРµР»СЊС†Р° Р±РёР»РµС‚РѕРІ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Owners', @level2type=N'COLUMN',@level2name=N'name'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РЈРґР°Р»РµРЅ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Owners', @level2type=N'COLUMN',@level2name=N'is_deleted'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РџРѕСЂСЏРґРєРѕРІС‹Р№ РЅРѕРјРµСЂ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Owners', @level2type=N'COLUMN',@level2name=N'seq_number'
 GO
 
-/*договора между владельцами и дилерами*/
+/*РґРѕРіРѕРІРѕСЂР° РјРµР¶РґСѓ РІР»Р°РґРµР»СЊС†Р°РјРё Рё РґРёР»РµСЂР°РјРё*/
 CREATE TABLE [Directory].[Contracts](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[owner_id] INT NOT NULL,
@@ -68,12 +68,12 @@ CREATE TABLE [Directory].[Contracts](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id владельца' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Contracts', @level2type=N'COLUMN',@level2name=N'owner_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id дилера' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Contracts', @level2type=N'COLUMN',@level2name=N'dealer_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'закрыт' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Contracts', @level2type=N'COLUMN',@level2name=N'is_closed'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id РІР»Р°РґРµР»СЊС†Р°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Contracts', @level2type=N'COLUMN',@level2name=N'owner_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id РґРёР»РµСЂР°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Contracts', @level2type=N'COLUMN',@level2name=N'dealer_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Р·Р°РєСЂС‹С‚' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Contracts', @level2type=N'COLUMN',@level2name=N'is_closed'
 GO
 
-/*площадка*/
+/*РїР»РѕС‰Р°РґРєР°*/
 CREATE TABLE [Directory].[Venues](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[name] NVARCHAR(50) NOT NULL,
@@ -83,12 +83,12 @@ CREATE TABLE [Directory].[Venues](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'имя площадки' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Venues', @level2type=N'COLUMN',@level2name=N'name'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'описание' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Venues', @level2type=N'COLUMN',@level2name=N'description'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'удален' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Venues', @level2type=N'COLUMN',@level2name=N'is_deleted'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РёРјСЏ РїР»РѕС‰Р°РґРєРё' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Venues', @level2type=N'COLUMN',@level2name=N'name'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РѕРїРёСЃР°РЅРёРµ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Venues', @level2type=N'COLUMN',@level2name=N'description'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'СѓРґР°Р»РµРЅ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Venues', @level2type=N'COLUMN',@level2name=N'is_deleted'
 GO
 
-/*зал*/
+/*Р·Р°Р»*/
 CREATE TABLE [Directory].[Halls](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[name] NVARCHAR(50) NULL,
@@ -99,12 +99,12 @@ CREATE TABLE [Directory].[Halls](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'имя зала' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Halls', @level2type=N'COLUMN',@level2name=N'name'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id площадки' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Halls', @level2type=N'COLUMN',@level2name=N'venue_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'удален' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Halls', @level2type=N'COLUMN',@level2name=N'is_deleted'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РёРјСЏ Р·Р°Р»Р°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Halls', @level2type=N'COLUMN',@level2name=N'name'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id РїР»РѕС‰Р°РґРєРё' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Halls', @level2type=N'COLUMN',@level2name=N'venue_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'СѓРґР°Р»РµРЅ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Halls', @level2type=N'COLUMN',@level2name=N'is_deleted'
 GO
 
-/*места*/
+/*РјРµСЃС‚Р°*/
 CREATE TABLE [Directory].[Places](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[sector] SMALLINT NOT NULL,
@@ -116,13 +116,13 @@ CREATE TABLE [Directory].[Places](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'номер сектора' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Places', @level2type=N'COLUMN',@level2name=N'sector'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'номер ряда' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Places', @level2type=N'COLUMN',@level2name=N'row_number'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'номер места' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Places', @level2type=N'COLUMN',@level2name=N'place_number'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id зала' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Places', @level2type=N'COLUMN',@level2name=N'hall_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РЅРѕРјРµСЂ СЃРµРєС‚РѕСЂР°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Places', @level2type=N'COLUMN',@level2name=N'sector'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РЅРѕРјРµСЂ СЂСЏРґР°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Places', @level2type=N'COLUMN',@level2name=N'row_number'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РЅРѕРјРµСЂ РјРµСЃС‚Р°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Places', @level2type=N'COLUMN',@level2name=N'place_number'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id Р·Р°Р»Р°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Places', @level2type=N'COLUMN',@level2name=N'hall_id'
 GO
 
-/*мероприятия*/
+/*РјРµСЂРѕРїСЂРёСЏС‚РёСЏ*/
 CREATE TABLE [Directory].[Events](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[seq_number] INT NOT NULL,
@@ -135,14 +135,14 @@ CREATE TABLE [Directory].[Events](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Порядковый номер события' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events', @level2type=N'COLUMN',@level2name=N'seq_number'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Наименование события' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events', @level2type=N'COLUMN',@level2name=N'name'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Владелец' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events', @level2type=N'COLUMN',@level2name=N'owner_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Удален' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events', @level2type=N'COLUMN',@level2name=N'is_deleted'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Описание' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events', @level2type=N'COLUMN',@level2name=N'description'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РџРѕСЂСЏРґРєРѕРІС‹Р№ РЅРѕРјРµСЂ СЃРѕР±С‹С‚РёСЏ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events', @level2type=N'COLUMN',@level2name=N'seq_number'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РќР°РёРјРµРЅРѕРІР°РЅРёРµ СЃРѕР±С‹С‚РёСЏ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events', @level2type=N'COLUMN',@level2name=N'name'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Р’Р»Р°РґРµР»РµС†' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events', @level2type=N'COLUMN',@level2name=N'owner_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РЈРґР°Р»РµРЅ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events', @level2type=N'COLUMN',@level2name=N'is_deleted'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РћРїРёСЃР°РЅРёРµ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events', @level2type=N'COLUMN',@level2name=N'description'
 GO
 
-/*события*/
+/*СЃРѕР±С‹С‚РёСЏ*/
 CREATE TABLE [Directory].[Events_time](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[event_id] INT NOT NULL,
@@ -157,15 +157,15 @@ CREATE TABLE [Directory].[Events_time](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id события' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'event_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id зала' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'hall_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'дата начала' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'start_date'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'дата окончания' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'end_date'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'продажи открыты/закрыты' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'is_closed'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Удален' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'is_deleted'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id СЃРѕР±С‹С‚РёСЏ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'event_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id Р·Р°Р»Р°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'hall_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РґР°С‚Р° РЅР°С‡Р°Р»Р°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'start_date'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РґР°С‚Р° РѕРєРѕРЅС‡Р°РЅРёСЏ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'end_date'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РїСЂРѕРґР°Р¶Рё РѕС‚РєСЂС‹С‚С‹/Р·Р°РєСЂС‹С‚С‹' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'is_closed'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РЈРґР°Р»РµРЅ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Events_time', @level2type=N'COLUMN',@level2name=N'is_deleted'
 GO
 
-/*точки продаж*/
+/*С‚РѕС‡РєРё РїСЂРѕРґР°Р¶*/
 CREATE TABLE [Directory].[Points](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[name] NVARCHAR(50) NOT NULL,
@@ -175,11 +175,11 @@ CREATE TABLE [Directory].[Points](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'имя' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Points', @level2type=N'COLUMN',@level2name=N'name'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id дилера' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Points', @level2type=N'COLUMN',@level2name=N'dealer_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РёРјСЏ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Points', @level2type=N'COLUMN',@level2name=N'name'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id РґРёР»РµСЂР°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Points', @level2type=N'COLUMN',@level2name=N'dealer_id'
 GO
 
-/*настройка сервисного сбора*/
+/*РЅР°СЃС‚СЂРѕР№РєР° СЃРµСЂРІРёСЃРЅРѕРіРѕ СЃР±РѕСЂР°*/
 CREATE TABLE [Directory].[Service_fee](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[name] NVARCHAR(50) NOT NULL,
@@ -189,12 +189,12 @@ CREATE TABLE [Directory].[Service_fee](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'имя' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_fee', @level2type=N'COLUMN',@level2name=N'name'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'процент' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_fee', @level2type=N'COLUMN',@level2name=N'per_cent'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'округлять' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_fee', @level2type=N'COLUMN',@level2name=N'round'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РёРјСЏ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_fee', @level2type=N'COLUMN',@level2name=N'name'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РїСЂРѕС†РµРЅС‚' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_fee', @level2type=N'COLUMN',@level2name=N'per_cent'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РѕРєСЂСѓРіР»СЏС‚СЊ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_fee', @level2type=N'COLUMN',@level2name=N'round'
 GO
 
-/*сервисный сбор на событие и точку продаж*/
+/*СЃРµСЂРІРёСЃРЅС‹Р№ СЃР±РѕСЂ РЅР° СЃРѕР±С‹С‚РёРµ Рё С‚РѕС‡РєСѓ РїСЂРѕРґР°Р¶*/
 CREATE TABLE [Directory].[Service_4_events_time](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[event_time_id] INT NOT NULL,
@@ -207,12 +207,12 @@ CREATE TABLE [Directory].[Service_4_events_time](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id события' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_4_events_time', @level2type=N'COLUMN',@level2name=N'event_time_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id точки продаж' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_4_events_time', @level2type=N'COLUMN',@level2name=N'point_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id сервисного сбора' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_4_events_time', @level2type=N'COLUMN',@level2name=N'service_fee_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id СЃРѕР±С‹С‚РёСЏ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_4_events_time', @level2type=N'COLUMN',@level2name=N'event_time_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id С‚РѕС‡РєРё РїСЂРѕРґР°Р¶' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_4_events_time', @level2type=N'COLUMN',@level2name=N'point_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id СЃРµСЂРІРёСЃРЅРѕРіРѕ СЃР±РѕСЂР°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Service_4_events_time', @level2type=N'COLUMN',@level2name=N'service_fee_id'
 GO
 
-/*склад билетов*/
+/*СЃРєР»Р°Рґ Р±РёР»РµС‚РѕРІ*/
 CREATE TABLE [Directory].[Tickets](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[event_time_id] INT NOT NULL,
@@ -226,17 +226,17 @@ CREATE TABLE [Directory].[Tickets](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id события' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Tickets', @level2type=N'COLUMN',@level2name=N'event_time_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id места' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Tickets', @level2type=N'COLUMN',@level2name=N'place_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'цена' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Tickets', @level2type=N'COLUMN',@level2name=N'price'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'дата ввода' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Tickets', @level2type=N'COLUMN',@level2name=N'input_date'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id статуса' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Tickets', @level2type=N'COLUMN',@level2name=N'status_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id СЃРѕР±С‹С‚РёСЏ' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Tickets', @level2type=N'COLUMN',@level2name=N'event_time_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id РјРµСЃС‚Р°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Tickets', @level2type=N'COLUMN',@level2name=N'place_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'С†РµРЅР°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Tickets', @level2type=N'COLUMN',@level2name=N'price'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РґР°С‚Р° РІРІРѕРґР°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Tickets', @level2type=N'COLUMN',@level2name=N'input_date'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id СЃС‚Р°С‚СѓСЃР°' , @level0type=N'SCHEMA',@level0name=N'Directory', @level1type=N'TABLE',@level1name=N'Tickets', @level2type=N'COLUMN',@level2name=N'status_id'
 GO
 
 CREATE SCHEMA People
 GO
 
-/*данные о клиентах*/
+/*РґР°РЅРЅС‹Рµ Рѕ РєР»РёРµРЅС‚Р°С…*/
 CREATE TABLE [People].[Clients](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[info] NVARCHAR(MAX) NOT NULL,
@@ -244,13 +244,13 @@ CREATE TABLE [People].[Clients](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'инфо о клиента' , @level0type=N'SCHEMA',@level0name=N'People', @level1type=N'TABLE',@level1name=N'Clients', @level2type=N'COLUMN',@level2name=N'info'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РёРЅС„Рѕ Рѕ РєР»РёРµРЅС‚Р°' , @level0type=N'SCHEMA',@level0name=N'People', @level1type=N'TABLE',@level1name=N'Clients', @level2type=N'COLUMN',@level2name=N'info'
 GO
 
 CREATE SCHEMA Purchasing
 GO
 
-/*корзина*/
+/*РєРѕСЂР·РёРЅР°*/
 CREATE TABLE [Purchasing].[Cart](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[client_session] UNIQUEIDENTIFIER NOT NULL,
@@ -267,16 +267,16 @@ CREATE TABLE [Purchasing].[Cart](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'guid клиента' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'client_session'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id билета' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'ticket_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'время создания' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'input_date'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'цена' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'price'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'цена сервисного сбора' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'service_fee_price'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'точка продажи' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'point_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id события' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'event_time_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'guid РєР»РёРµРЅС‚Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'client_session'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id Р±РёР»РµС‚Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'ticket_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РІСЂРµРјСЏ СЃРѕР·РґР°РЅРёСЏ' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'input_date'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'С†РµРЅР°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'price'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'С†РµРЅР° СЃРµСЂРІРёСЃРЅРѕРіРѕ СЃР±РѕСЂР°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'service_fee_price'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'С‚РѕС‡РєР° РїСЂРѕРґР°Р¶Рё' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'point_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id СЃРѕР±С‹С‚РёСЏ' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Cart', @level2type=N'COLUMN',@level2name=N'event_time_id'
 GO
 
-/*заказ*/
+/*Р·Р°РєР°Р·*/
 CREATE TABLE [Purchasing].[Orders](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[seq_number] INT NOT NULL,
@@ -297,19 +297,19 @@ CREATE TABLE [Purchasing].[Orders](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'номер заказа' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'seq_number'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'точка продаж' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'point_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'сумма заказа' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'amount'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'сумма сервисного сбора' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'service_fee_price'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id статуса' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'status_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'дата заказа' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'order_date'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'дата оплаты заказа' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'pay_time'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id события' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'event_time_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id клиента' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'client_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'по пушкинской карте' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'is_pushkin'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РЅРѕРјРµСЂ Р·Р°РєР°Р·Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'seq_number'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'С‚РѕС‡РєР° РїСЂРѕРґР°Р¶' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'point_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'СЃСѓРјРјР° Р·Р°РєР°Р·Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'amount'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'СЃСѓРјРјР° СЃРµСЂРІРёСЃРЅРѕРіРѕ СЃР±РѕСЂР°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'service_fee_price'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id СЃС‚Р°С‚СѓСЃР°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'status_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РґР°С‚Р° Р·Р°РєР°Р·Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'order_date'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РґР°С‚Р° РѕРїР»Р°С‚С‹ Р·Р°РєР°Р·Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'pay_time'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id СЃРѕР±С‹С‚РёСЏ' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'event_time_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id РєР»РёРµРЅС‚Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'client_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РїРѕ РїСѓС€РєРёРЅСЃРєРѕР№ РєР°СЂС‚Рµ' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders', @level2type=N'COLUMN',@level2name=N'is_pushkin'
 GO
 
-/*детализация заказа*/
+/*РґРµС‚Р°Р»РёР·Р°С†РёСЏ Р·Р°РєР°Р·Р°*/
 CREATE TABLE [Purchasing].[Order_lines](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[order_id] INT NOT NULL,
@@ -329,16 +329,16 @@ CREATE TABLE [Purchasing].[Order_lines](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id заказа' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'order_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id билета' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'ticket_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'цена' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'price'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'цена сервисного сбора' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'service_free_price'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id статуса' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'status_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id точки продаж' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'point_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id события' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'event_time_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id Р·Р°РєР°Р·Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'order_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id Р±РёР»РµС‚Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'ticket_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'С†РµРЅР°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'price'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'С†РµРЅР° СЃРµСЂРІРёСЃРЅРѕРіРѕ СЃР±РѕСЂР°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'service_free_price'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id СЃС‚Р°С‚СѓСЃР°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'status_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id С‚РѕС‡РєРё РїСЂРѕРґР°Р¶' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'point_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id СЃРѕР±С‹С‚РёСЏ' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'event_time_id'
 GO
 
-/*оплата/возвраты заказов*/
+/*РѕРїР»Р°С‚Р°/РІРѕР·РІСЂР°С‚С‹ Р·Р°РєР°Р·РѕРІ*/
 CREATE TABLE [Purchasing].[Order_transactions](
 	[id] INT IDENTITY(1,1) NOT NULL,
 	[order_id] INT NOT NULL,
@@ -351,11 +351,11 @@ CREATE TABLE [Purchasing].[Order_transactions](
 ) ON [PRIMARY]
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id заказ' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_transactions', @level2type=N'COLUMN',@level2name=N'order_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'сумма' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_transactions', @level2type=N'COLUMN',@level2name=N'transaction_amount'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'дата транзакции' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_transactions', @level2type=N'COLUMN',@level2name=N'transaction_date'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id терминала' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_transactions', @level2type=N'COLUMN',@level2name=N'terminal_id'
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'rrn платежа' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_transactions', @level2type=N'COLUMN',@level2name=N'rrn'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id Р·Р°РєР°Р·' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_transactions', @level2type=N'COLUMN',@level2name=N'order_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'СЃСѓРјРјР°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_transactions', @level2type=N'COLUMN',@level2name=N'transaction_amount'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'РґР°С‚Р° С‚СЂР°РЅР·Р°РєС†РёРё' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_transactions', @level2type=N'COLUMN',@level2name=N'transaction_date'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id С‚РµСЂРјРёРЅР°Р»Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_transactions', @level2type=N'COLUMN',@level2name=N'terminal_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'rrn РїР»Р°С‚РµР¶Р°' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_transactions', @level2type=N'COLUMN',@level2name=N'rrn'
 GO
 
 
