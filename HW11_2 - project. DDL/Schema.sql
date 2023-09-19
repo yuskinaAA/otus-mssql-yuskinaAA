@@ -26,7 +26,7 @@ GO
 /*схема для каталогов*/
 CREATE SCHEMA Directory
 GO
-
+order_return_id
 /*дилеры*/
 CREATE TABLE [Directory].[Dealers](
 	[id] INT IDENTITY(1,1) NOT NULL,
@@ -76,7 +76,7 @@ GO
 /*площадка*/
 CREATE TABLE [Directory].[Venues](
 	[id] INT IDENTITY(1,1) NOT NULL,
-	[name] NVARCHAR(50) NOT NULL,
+	[name] NVARCHAR(100) NOT NULL,
 	[description] NVARCHAR(1000) NULL,
 	[is_deleted] BIT DEFAULT(0) NULL,
 	CONSTRAINT [PK_Venues] PRIMARY KEY([id])
@@ -91,7 +91,7 @@ GO
 /*зал*/
 CREATE TABLE [Directory].[Halls](
 	[id] INT IDENTITY(1,1) NOT NULL,
-	[name] NVARCHAR(50) NULL,
+	[name] NVARCHAR(100) NULL,
 	[venue_id] INT NOT NULL,
 	[is_deleted] BIT NOT NULL,
 	CONSTRAINT [PK_Halls] PRIMARY KEY([id]),
@@ -287,7 +287,7 @@ CREATE TABLE [Purchasing].[Orders](
 	[order_date] DATETIME NOT NULL,
 	[pay_time] DATETIME NULL,
 	[event_time_id] INT NOT NULL,
-	[client_id] INT NOT NULL,
+	[client_id] INT NULL,
 	[is_pushkin] BIT DEFAULT(0) NOT NULL,
 	CONSTRAINT [PK_Orders] PRIMARY KEY([id]),
 	CONSTRAINT [FK_Orders_Clients] FOREIGN KEY([client_id]) REFERENCES [People].[Clients] ([id]),
@@ -319,7 +319,6 @@ CREATE TABLE [Purchasing].[Order_lines](
 	[status_id] INT NOT NULL,
 	[point_id] INT NOT NULL,
 	[event_time_id] INT NOT NULL,
-	[seq_number] INT NOT NULL,
 	CONSTRAINT [PK_Order_lines] PRIMARY KEY([id]),
 	CONSTRAINT [FK_Order_lines_Events_time] FOREIGN KEY([event_time_id]) REFERENCES [Directory].[Events_time] ([id]),
 	CONSTRAINT [FK_Order_lines_Orders] FOREIGN KEY([order_id]) REFERENCES [Purchasing].[Orders] ([id]),
@@ -336,6 +335,49 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'цена се�
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id статуса' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'status_id'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id точки продаж' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'point_id'
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id события' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_lines', @level2type=N'COLUMN',@level2name=N'event_time_id'
+GO
+
+/*заказ*/
+CREATE TABLE [Purchasing].[Orders_return](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[seq_number] INT NOT NULL,
+	[order_id] INT NOT NULL,
+	[point_id] INT NOT NULL,
+	[amount] DECIMAL(18, 2) NOT NULL,
+	[service_fee_price] DECIMAL(18, 3) NULL,
+	[return_date] DATETIME NOT NULL,
+	CONSTRAINT [PK_Orders_return] PRIMARY KEY([id]),
+	CONSTRAINT [FK_Orders_return_Orders] FOREIGN KEY([order_id]) REFERENCES [Purchasing].[Orders] ([id]),
+	CONSTRAINT [FK_Orders_return_Points] FOREIGN KEY([point_id]) REFERENCES [Directory].[Points] ([id])
+) ON [PRIMARY]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'номер возврата' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders_return', @level2type=N'COLUMN',@level2name=N'seq_number'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id заказа' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders_return', @level2type=N'COLUMN',@level2name=N'order_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'точка продаж' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders_return', @level2type=N'COLUMN',@level2name=N'point_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'сумма возврата' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders_return', @level2type=N'COLUMN',@level2name=N'amount'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'сумма сервисного сбора' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders_return', @level2type=N'COLUMN',@level2name=N'service_fee_price'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'дата возврата' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Orders_return', @level2type=N'COLUMN',@level2name=N'return_date'
+GO
+
+/*детализация возвратов*/
+CREATE TABLE [Purchasing].[Order_return_lines](
+	[id] INT IDENTITY(1,1) NOT NULL,
+	[order_return_id] INT NOT NULL,
+	[ticket_id] INT NOT NULL,
+	[price] DECIMAL(18, 3) NOT NULL,
+	[service_free_price] DECIMAL(18, 3) NOT NULL,
+	[seq_number] INT NOT NULL,
+	CONSTRAINT [PK_Order_return_lines] PRIMARY KEY([id]),
+	CONSTRAINT [FK_Order_return_lines_Events_time] FOREIGN KEY([order_return_id]) REFERENCES [Purchasing].[Orders_return] ([id]),
+	CONSTRAINT [FK_Order_return_lines_Tickets] FOREIGN KEY([ticket_id]) REFERENCES [Directory].[Tickets] ([id])
+) ON [PRIMARY]
+GO
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id возврата' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_return_lines', @level2type=N'COLUMN',@level2name=N'order_return_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'id билета' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_return_lines', @level2type=N'COLUMN',@level2name=N'ticket_id'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'цена билета' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_return_lines', @level2type=N'COLUMN',@level2name=N'price'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'цена сервисного сбора' , @level0type=N'SCHEMA',@level0name=N'Purchasing', @level1type=N'TABLE',@level1name=N'Order_return_lines', @level2type=N'COLUMN',@level2name=N'service_free_price'
 GO
 
 /*оплата/возвраты заказов*/
