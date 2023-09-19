@@ -1,5 +1,5 @@
-п»ї/*
-РСЃС…РѕРґРЅС‹Р№ Р·Р°РїСЂРѕСЃ
+/*
+Исходный запрос
 
 Select ord.CustomerID, 
        det.StockItemID, 
@@ -27,7 +27,7 @@ ORDER BY ord.CustomerID, det.StockItemID
 */
 
 /*
-   РЎС‚Р°С‚РёСЃС‚РёРєР° РїРѕ РёСЃС…РѕРґРЅРѕРјСѓ Р·Р°РїСЂРѕСЃСѓ
+   Статистика по исходному запросу
 
     Table 'StockItemTransactions'. Scan count 1, logical reads 0, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 29, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
 	Table 'StockItemTransactions'. Segment reads 1, segment skipped 0.
@@ -39,8 +39,8 @@ ORDER BY ord.CustomerID, det.StockItemID
 	Table 'Invoices'. Scan count 1, logical reads 44525, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
 	Table 'StockItems'. Scan count 1, logical reads 2, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
 
-	1 Р’РђР РРђРќРў РћРџРўРРњРР—РђР¦РР
-	РЎС‚Р°С‚РёСЃС‚РёРєР° РїРѕСЃР»Рµ РѕРїС‚РёРјРёР·Р°С†РёРё
+	1 ВАРИАНТ ОПТИМИЗАЦИИ
+	Статистика после оптимизации
 
     Table 'OrderLines'. Scan count 4, logical reads 0, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 518, lob physical reads 4, lob page server reads 0, lob read-ahead reads 795, lob page server read-ahead reads 0.
     Table 'OrderLines'. Segment reads 2, segment skipped 0.
@@ -50,9 +50,8 @@ ORDER BY ord.CustomerID, det.StockItemID
     Table 'Invoices'. Scan count 1, logical reads 223, physical reads 1, page server reads 0, read-ahead reads 221, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
     Table 'StockItemTransactions'. Scan count 1, logical reads 3, physical reads 2, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
 
-	2 Р’РђР РРђРќРў РћРџРўРРњРР—РђР¦РР
-	РЎС‚Р°С‚РёСЃС‚РёРєР° РїРѕСЃР»Рµ РѕРїС‚РёРјРёР·Р°С†РёРё
-
+	2 ВАРИАНТ ОПТИМИЗАЦИИ
+	Статистика после оптимизации
 	Table 'Orders'. Scan count 3, logical reads 157, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 76, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
     Table 'Orders'. Segment reads 1, segment skipped 0.
 	Table 'OrderLines'. Scan count 2, logical reads 0, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 168, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
@@ -64,34 +63,34 @@ ORDER BY ord.CustomerID, det.StockItemID
 
 
 
-РћРїС‚РёРјРёР·Р°С†РёСЏ 1 Р’РђР РРђРќРў:
-1. РЈР±СЂР°Р»Р° РїРѕРґР·Р°РїСЂРѕСЃ
+Оптимизация 1 ВАРИАНТ:
+1. Убрала подзапрос
 
          (SELECT 
 			SupplierId
 		 FROM Warehouse.StockItems AS It
 		 Where It.StockItemID = det.StockItemID) = 12
 
-РўР°Рє РєР°Рє Р·Р°РїСЂРѕСЃ 
+Так как запрос 
 		SELECT * FROM Warehouse.StockItems si
 		INNER JOIN Warehouse.StockItemTransactions siTran ON si.StockItemID = siTran.StockItemID
 		WHERE si.SupplierID <> siTran.SupplierID
-РїРѕРєР°Р·Р°Р», С‡С‚Рѕ SupplierID РІ С‚Р°Р±Р»РёС†Р°С… Warehouse.StockItems Рё Warehouse.StockItemTransactions СЃРѕРІРїР°РґР°СЋС‚
+показал, что SupplierID в таблицах Warehouse.StockItems и Warehouse.StockItemTransactions совпадают
 
-Р§С‚РѕР±С‹ РёР·Р±Р°РІРёС‚СЊСЃСЏ РѕС‚ keyLookup РѕР±РЅРѕРІРёР»Р° РёРЅРґРµРєСЃ
+Чтобы избавиться от keyLookup обновила индекс
 CREATE NONCLUSTERED INDEX [FK_Warehouse_StockItemTransactions_SupplierID_StockItemId] ON [Warehouse].[StockItemTransactions]
 (
 	[SupplierID] ASC,
 	[StockItemID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [USERDATA]
 GO
-Р Р•Р—РЈР›Р¬РўРђРў: Index Seek(15 СЃС‚СЂРѕРє) РІРјРµСЃС‚Рѕ Columnstore Index Scan(15876 СЃС‚СЂРѕРє)
+РЕЗУЛЬТАТ: Index Seek(15 строк) вместо Columnstore Index Scan(15876 строк)
 
-2. РџРѕРґР·Р°РїСЂРѕСЃ РІС‹РЅРµСЃР»Р° РІ cte, РґР°Р»РµРµ СЃРґР¶РѕР№РЅРёР»Р° СЃ С‚Р°Р±Р»РёС†РµР№ Invoices
-Р Р•Р—РЈР›Р¬РўРђРў: РљРѕР»РёС‡РµСЃС‚РІРѕ Р»РѕРіРёС‡РµСЃРєРёС… С‡С‚РµРЅРёР№ СѓРјРµРЅСЊС€РёР»РѕСЃСЊ Invoices СЃ 44525 РґРѕ 223 (С‚РѕР»СЊРєРѕ РїРѕСЏРІРёР»РѕСЃСЊ С„РёР·РёС‡РµСЃРєРѕРµ С‡С‚РµРЅРёРµ. РџРѕС‡РµРјСѓ? РџР°РјСЏС‚Рё РЅРµ С…РІР°С‚РёР»Рѕ?)
-                                                    Orders   c 883 РґРѕ 314 
+2. Подзапрос вынесла в cte, далее сджойнила с таблицей Invoices
+РЕЗУЛЬТАТ: Количество логических чтений уменьшилось Invoices с 44525 до 223 (только появилось физическое чтение. Почему? Памяти не хватило?)
+                                                    Orders   c 883 до 314 
 
-Р Р•Р—РЈР›Р¬РўРђРў Р—РђРџР РћРЎРђ
+РЕЗУЛЬТАТ ЗАПРОСА
 */
 ;WITH cteCustomers AS (
       SELECT Total.CustomerID
@@ -119,11 +118,11 @@ ORDER BY ord.CustomerID, det.StockItemID
 
 
 /*
-РћРїС‚РёРјРёР·Р°С†РёСЏ 2 Р’РђР РРђРќРў:
-РўРѕ Р¶Рµ СЃР°РјРѕРµ С‡С‚Рѕ Рё РІ 1 Р’РђР РРђРќРўР•
+Оптимизация 2 ВАРИАНТ:
+То же самое что и в 1 ВАРИАНТЕ
 
-РР·Р±Р°РІРёС‚СЊСЃСЏ РѕС‚ РїРѕРёСЃРєР° РїРѕ OrderLines РјРѕР¶РЅРѕ РµСЃР»Рё РІ Orders РґРѕР±Р°РІРёС‚СЊ РєРѕР»РѕРЅРєСѓ Total = UnitPrice*Quantity + РєРѕР»РѕРЅРѕС‡РЅС‹Р№ РёРЅРґРµРєСЃ РЅР° CustomerId, Total
-РџРѕРїСЂРѕР±СѓСЋ СЂРµР°Р»РёР·РѕРІР°С‚СЊ, РїРѕСЃРјРѕС‚СЂРёРј РЅР° СЂРµР·СѓР»СЊС‚Р°С‚
+Избавиться от поиска по OrderLines можно если в Orders добавить колонку Total = UnitPrice*Quantity + колоночный индекс на CustomerId, Total
+РЕЗУЛЬТАТ относительно первой оптимизации: Количество Orders   c 314  до 157 
 */
 ALTER TABLE Sales.Orders ADD Total DECIMAL(18,2)
 
