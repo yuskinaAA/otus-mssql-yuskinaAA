@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Отчеты для билетной системы", "Отчеты для билетной системы\Отчеты для билетной системы.rptproj", "{49D6A276-A098-4690-8C61-2B2DAAC69A7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49D6A276-A098-4690-8C61-2B2DAAC69A7E}.Debug|Default.ActiveCfg = Debug
+		{49D6A276-A098-4690-8C61-2B2DAAC69A7E}.Debug|Default.Build.0 = Debug
+		{49D6A276-A098-4690-8C61-2B2DAAC69A7E}.Debug|Default.Deploy.0 = Debug
+		{49D6A276-A098-4690-8C61-2B2DAAC69A7E}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{49D6A276-A098-4690-8C61-2B2DAAC69A7E}.DebugLocal|Default.Build.0 = DebugLocal
+		{49D6A276-A098-4690-8C61-2B2DAAC69A7E}.Release|Default.ActiveCfg = Release
+		{49D6A276-A098-4690-8C61-2B2DAAC69A7E}.Release|Default.Build.0 = Release
+		{49D6A276-A098-4690-8C61-2B2DAAC69A7E}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D4D7D13-B25A-409E-B0CE-4EA8AE9662CA}
+	EndGlobalSection
+EndGlobal
