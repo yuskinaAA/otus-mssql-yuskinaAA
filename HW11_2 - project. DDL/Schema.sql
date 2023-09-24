@@ -366,8 +366,7 @@ CREATE TABLE [Purchasing].[Order_return_lines](
 	[order_return_id] INT NOT NULL,
 	[ticket_id] INT NOT NULL,
 	[price] DECIMAL(18, 3) NOT NULL,
-	[service_free_price] DECIMAL(18, 3) NOT NULL,
-	[seq_number] INT NOT NULL,
+	[service_fee_price] DECIMAL(18, 3) NOT NULL,
 	CONSTRAINT [PK_Order_return_lines] PRIMARY KEY([id]),
 	CONSTRAINT [FK_Order_return_lines_Events_time] FOREIGN KEY([order_return_id]) REFERENCES [Purchasing].[Orders_return] ([id]),
 	CONSTRAINT [FK_Order_return_lines_Tickets] FOREIGN KEY([ticket_id]) REFERENCES [Directory].[Tickets] ([id])
