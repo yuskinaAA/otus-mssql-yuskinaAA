@@ -1,13 +1,13 @@
-/*Основной сценарий*/
---1. Получить список активных билетов
+/*РћСЃРЅРѕРІРЅРѕР№ СЃС†РµРЅР°СЂРёР№*/
+--1. РџРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє Р°РєС‚РёРІРЅС‹С… Р±РёР»РµС‚РѕРІ
 SELECT s.description, t.* FROM Directory.Tickets t
 INNER JOIN Dictionary.Statuses s ON s.id = t.status_id
 INNER JOIN Directory.Events_time et ON et.id = t.event_time_id
 WHERE status_id = 36 AND et.start_date >= '20230930'
 
---2. Положить билет в корзину
+--2. РџРѕР»РѕР¶РёС‚СЊ Р±РёР»РµС‚ РІ РєРѕСЂР·РёРЅСѓ
 DECLARE @client_session uniqueidentifier
---генерируем сессию клиента/корзина
+--РіРµРЅРµСЂРёСЂСѓРµРј СЃРµСЃСЃРёСЋ РєР»РёРµРЅС‚Р°/РєРѕСЂР·РёРЅР°
 SET @client_session = NEWID()
 
 EXECUTE [dbo].[PutTicketToCart] 
@@ -15,15 +15,15 @@ EXECUTE [dbo].[PutTicketToCart]
   ,@ticketID = 49	
   ,@pointID = 1179
 
---проверяем, что билет в корзине
+--РїСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ Р±РёР»РµС‚ РІ РєРѕСЂР·РёРЅРµ
 SELECT * FROM Purchasing.Cart
 
---проверяем что у билета сменился статус 
+--РїСЂРѕРІРµСЂСЏРµРј С‡С‚Рѕ Сѓ Р±РёР»РµС‚Р° СЃРјРµРЅРёР»СЃСЏ СЃС‚Р°С‚СѓСЃ 
 SELECT s.description, t.* FROM Directory.Tickets t
 INNER JOIN Dictionary.Statuses s ON s.id = t.status_id
 WHERE t.id = 49
 
---попробовать снова положить билет в корзину
+--РїРѕРїСЂРѕР±РѕРІР°С‚СЊ СЃРЅРѕРІР° РїРѕР»РѕР¶РёС‚СЊ Р±РёР»РµС‚ РІ РєРѕСЂР·РёРЅСѓ
 
 
 
